@@ -1,0 +1,20 @@
+{% extends "post/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+	<form action="" method='post' class="mx-auto w-75" id="PostCreateForm">
+	    <h1 class="h1 ms-auto">Create Post</h1>
+	    {% csrf_token %}
+		    {% for field in form %}
+			    <label for="{{field.id_for_label}}" class="my-2">{{field.label_tag}}</label>
+			    {{ field.errors }}
+			    {% render_field field class="form-control" %}
+		    {% endfor %}
+	    <input type="submit" value="submit" class="btn btn-outline-dark mt-2">
+	</form>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'blog/js/create.js' %}"></script>
+{% endblock %}
+

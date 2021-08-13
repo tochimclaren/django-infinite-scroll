@@ -1,20 +1,7 @@
+{% extends "post/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        #content{
-			margin: 0 auto;
-			width: 40vw;
-		}
-	</style>
-</head>
-
-<body>
+{% block content %}
     <div id="content">
         {% for post in page_obj %}
 	        <div>
@@ -23,7 +10,8 @@
 	        </div>
         {% endfor %}
     </div>
-</body>
-<script type="text/javascript" src="{% static 'blog/js/main.js' %}"></script>
+{% endblock %}
 
-</html>
+    {% block script %}
+        <script type="text/javascript" src="{% static 'blog/js/main.js' %}"></script>
+    {% endblock %}

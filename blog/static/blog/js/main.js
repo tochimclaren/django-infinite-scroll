@@ -1,9 +1,6 @@
-console.log("it's alive!")
+const content = document.querySelector("#content");
 
-
-content = document.querySelector("#content");
 let page = 1
-
 window.onscroll = function() {
     url = `/?page=${page}`
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {

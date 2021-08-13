@@ -1,7 +1,9 @@
 from django.core.paginator import Paginator
+from django.forms import model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import render
 from .models import Post
+from .forms import PostForm
 
 
 def posts(request):
@@ -22,3 +24,22 @@ def posts(request):
 
     ctx = {'page_obj': page_obj}
     return render(request, 'post/posts.html', ctx)
+
+
+def post_create(request):
+    form = PostForm()
+    if request.method == "POST":
+        form = PostForm(request.POST or None)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+
+            return JsonResponse(
+                model_to_dict(instance, fields=['title']), status=201)
+        else:
+            return JsonResponse(form.errors, safe=False, status=200)
+
+    ctx = {
+        'form': form
+    }
+    return render(request, 'post/post_create.html', ctx)
